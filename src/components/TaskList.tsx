@@ -15,6 +15,10 @@ export function TaskList() {
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
   function handleCreateNewTask() {
+    if(!newTaskTitle) {
+      return;
+    }
+
     setTasks(old => [...old, {
       id: Date.now(),
       title: newTaskTitle,
@@ -36,7 +40,6 @@ export function TaskList() {
     <section className="task-list container">
       <header>
         <h2>Minhas tasks</h2>
-
         <div className="input-group">
           <input 
             type="text" 
@@ -49,7 +52,6 @@ export function TaskList() {
           </button>
         </div>
       </header>
-
       <main>
         <ul>
           {tasks.map(task => (
@@ -66,13 +68,11 @@ export function TaskList() {
                 </label>
                 <p>{task.title}</p>
               </div>
-
               <button type="button" data-testid="remove-task-button" onClick={() => handleRemoveTask(task.id)}>
                 <FiTrash size={16}/>
               </button>
             </li>
           ))}
-          
         </ul>
       </main>
     </section>
